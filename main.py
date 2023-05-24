@@ -13,10 +13,22 @@ z0 = random.randint(0, 5)  # Numero de aviones en tierra en t0
 print(z0)
 n = int(input("Cuantas horas desea simular? "))
 
-tiemposX = []
-tiemposY = []
+tiemposX = LlenarTiempos(lambdaX, n)
+tiemposY = LlenarTiempos(lambdaY, n)
 
-for i in range(n):
-    tiemposX.append(ConvertirHorasAMinutos(SimularTiempo(lambdaX)))
-    tiemposY.append(ConvertirHorasAMinutos(SimularTiempo(lambdaY)))
+aterrizaje = []
 
+sumaActual = 0
+numAterrizajes = 0
+for tiempo in tiemposX:
+    sumaActual = sumaActual + tiempo
+    if sumaActual > 60:
+        sumaActual = 0
+        aterrizaje.append(numAterrizajes)
+        numAterrizajes = numAterrizajes + 1
+    else:
+        numAterrizajes = numAterrizajes + 1
+aterrizaje.append(numAterrizajes)
+print(aterrizaje)
+print(tiemposX)
+# print(len(tiemposY))
